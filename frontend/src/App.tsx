@@ -8,6 +8,7 @@ import {
 import { isEnokiNetwork, registerEnokiWallets } from "@mysten/enoki";
 import { networkConfig } from "./main";
 import NotarizationTab from "@/tabs/NotarizationTab";
+import VerifyTab from "./tabs/VerifyTab";
 
 function RegisterEnokiWallets() {
   const { client, network } = useSuiClientContext();
@@ -83,17 +84,7 @@ function App() {
             <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 shadow-xl min-h-[300px]">
               {activeTab === "notarize" && <NotarizationTab />}
 
-              {activeTab === "verify" && (
-                <div className="space-y-4">
-                  <h2 className="text-xl font-semibold text-cyan-400">
-                    Verifikasi (WIP)
-                  </h2>
-                  <p className="text-slate-300">
-                    Area ini akan digunakan untuk memverifikasi file yang telah
-                    dicatat di blockchain.
-                  </p>
-                </div>
-              )}
+              {activeTab === "verify" && <VerifyTab />}
             </div>
           </main>
         </div>

@@ -3,6 +3,7 @@ import { Router, Request, Response } from 'express';
 import multer from 'multer';
 import crypto from 'crypto';
 import { uploadToWalrus } from '../services/walrusClient';
+import { saveNotarizationRecord } from '../utils/notarizationStore';
 
 const router = Router();
 const upload = multer();
@@ -20,6 +21,18 @@ router.post('/notarize', upload.single('file'), async (req: Request, res: Respon
     const hash = crypto.createHash('sha256').update(buffer).digest('hex');
 
     const { blobId, walrus_url } = await uploadToWalrus(buffer, filename, mimeType);
+
+    try {
+      await saveNotarizationRecord({
+        hash: hash.toLowerCase(),
+        blobId,
+        walrusUrl: walrus_url,
+        filename,
+        storedAt: new Date().toISOString(),
+      });
+    } catch (storeErr) {
+      console.warn('Failed to persist notarization record:', storeErr);
+    }
 
     return res.json({
       file_hash: hash,

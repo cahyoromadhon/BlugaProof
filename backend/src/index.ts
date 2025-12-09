@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import sponsorRoute from './routes/sponsor';
 import sponsorCompleteRoute from './routes/sponsorComplete';
 import notarizeRoute from './routes/notarize';
+import verifyRoute from './routes/verify';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api', sponsorRoute);
 app.use('/api', sponsorCompleteRoute);
 app.use('/api', notarizeRoute);
+app.use('/api', verifyRoute);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Backend OK' });
