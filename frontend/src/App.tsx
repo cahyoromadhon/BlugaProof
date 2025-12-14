@@ -21,9 +21,7 @@ function RegisterEnokiWallets() {
 
     const { unregister } = registerEnokiWallets({
       apiKey: ENOKI_API_KEY!,
-      providers: {
-        google: { clientId: GOOGLE_CLIENT_ID! },
-      },
+      providers: { google: { clientId: GOOGLE_CLIENT_ID! } },
       client: client as any,
       network,
     });
@@ -42,49 +40,88 @@ function App() {
     <SuiClientProvider networks={networkConfig} defaultNetwork="testnet">
       <RegisterEnokiWallets />
       <WalletProvider autoConnect>
-        <div className="min-h-screen bg-slate-950 text-white">
-          {/* Navbar */}
-          <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md">
-            <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
-              <h1 className="text-2xl font-bold tracking-tight">
-                Beluga<span className="text-cyan-400">.</span>
-              </h1>
-              <ConnectButton className="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-xl shadow-lg shadow-cyan-500/20" />
+        {/* Lock viewport: no page scroll */}
+        <div className="h-screen overflow-hidden bg-linear-to-b from-white to-slate-50 text-slate-900">
+          {/* Top bar fixed height */}
+          <header className="h-16 border-b border-slate-200 bg-white/80 backdrop-blur">
+            <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl border border-slate-200 bg-white shadow-sm grid place-items-center">
+                  <span className="text-sm font-semibold text-slate-900">B</span>
+                </div>
+                <div className="leading-tight">
+                  <div className="text-base font-semibold tracking-tight">
+                    Bluga Proof
+                  </div>
+                </div>
+              </div>
+
+              <ConnectButton className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-sm hover:bg-slate-50 active:bg-slate-100 cursor-pointer disabled:cursor-not-allowed" />
             </div>
           </header>
 
-          {/* Content */}
-          <main className="max-w-4xl mx-auto px-6 py-10 space-y-8">
-            {/* Tab Selector */}
-            <div className="flex space-x-3">
-              <button
-                onClick={() => setActiveTab("notarize")}
-                className={`px-5 py-2 rounded-xl font-medium transition ${
-                  activeTab === "notarize"
-                    ? "bg-cyan-600 text-white shadow shadow-cyan-600/30"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                }`}
-              >
-                Notarisasi
-              </button>
+          {/* Main takes remaining height */}
+          <main className="mx-auto flex h-[calc(100vh-4rem)] w-full max-w-6xl flex-col px-6 py-5">
+            {/* Compact header + tabs (fixed height) */}
+            <div className="flex items-end justify-between gap-4">
+              <div className="space-y-1">
+                <h1 className="text-xl font-semibold tracking-tight">
+                  Dashboard
+                </h1>
+                <p className="text-xs text-slate-600">
+                  Notarize and Verify with Bluga Proof.
+                </p>
+              </div>
 
-              <button
-                onClick={() => setActiveTab("verify")}
-                className={`px-5 py-2 rounded-xl font-medium transition ${
-                  activeTab === "verify"
-                    ? "bg-cyan-600 text-white shadow shadow-cyan-600/30"
-                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                }`}
-              >
-                Verifikasi
-              </button>
+              <div className="inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-sm">
+                <button
+                  onClick={() => setActiveTab("notarize")}
+                  className={[
+                    "rounded-xl px-4 py-2 text-sm font-medium transition cursor-pointer disabled:cursor-not-allowed",
+                    activeTab === "notarize"
+                      ? "bg-slate-900 text-white shadow-sm"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  Notarize
+                </button>
+                <button
+                  onClick={() => setActiveTab("verify")}
+                  className={[
+                    "rounded-xl px-4 py-2 text-sm font-medium transition cursor-pointer disabled:cursor-not-allowed",
+                    activeTab === "verify"
+                      ? "bg-slate-900 text-white shadow-sm"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  Verify
+                </button>
+              </div>
             </div>
 
-            {/* Tab Content */}
-            <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 shadow-xl min-h-[300px]">
-              {activeTab === "notarize" && <NotarizationTab />}
+            {/* Card grows to fill; internal content should also be no-scroll */}
+            <div className="mt-4 flex min-h-0 flex-1 flex-col rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <div className="border-b border-slate-200 px-6 py-3">
+                <div className="text-sm font-medium text-slate-900">
+                  {activeTab === "notarize" ? "Notarization Tool" : "Verify Tool"}
+                </div>
+                <div className="text-xs text-slate-500">
+                  {activeTab === "notarize"
+                    ? "Upload → Hash → Store → Proof"
+                    : "Paste hash → fetch proof → open explorer"}
+                </div>
+              </div>
 
-              {activeTab === "verify" && <VerifyTab />}
+              {/* This area must not overflow */}
+              <div className="min-h-0 flex-1 p-5">
+                {activeTab === "notarize" && <NotarizationTab />}
+                {activeTab === "verify" && <VerifyTab />}
+              </div>
+            </div>
+
+            {/* Footer (small) */}
+            <div className="pt-3 text-[11px] text-slate-500">
+              Developed by <span className="underline underline-offset-2 font-medium"><a href="x.com/cahyorom">Cahyo</a></span>
             </div>
           </main>
         </div>
