@@ -1,10 +1,9 @@
 # Bluga Proof
-
-**Bluga Proof** is a decentralized digital copyright proof system built on the Sui blockchain ecosystem. The project leverages Walrus decentralized storage and SHA256 cryptographic hashing to create immutable, verifiable proof of digital asset ownership and copyright protection.
+<img width="1527" height="906" alt="image_2025-12-14_15-41-39" src="https://github.com/user-attachments/assets/9bc4db8d-3c53-42b1-8d94-5709ef45b20c" />
 
 ## 🎯 Overview
 
-Bluga Proof provides a trustless, decentralized solution for protecting digital copyrights. By combining blockchain technology with decentralized storage, users can:
+**Bluga Proof** is a decentralized digital copyright proof system built on the Sui blockchain ecosystem. The project leverages Walrus decentralized storage and SHA256 cryptographic hashing to create immutable, verifiable proof of digital asset ownership and copyright protection. Bluga provides a trustless, decentralized solution for protecting digital copyrights. By combining blockchain technology with decentralized storage, users can:
 
 - **Notarize digital files** - Upload and register files with cryptographic proof of ownership
 - **Verify authenticity** - Check if a file has been previously registered and retrieve its certificate
