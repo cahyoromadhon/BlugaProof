@@ -57,7 +57,6 @@ contract/
 
 **Key Features:**
 - `BlugaCertificate` struct: Stores file hash, metadata, creator address, and timestamp
-- `mint_certificate` function: Creates on-chain certificates for notarized files
 
 ### 2. **Backend** (`/backend`)
 
