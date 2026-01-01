@@ -55,9 +55,6 @@ contract/
     └── contract_tests.move # Contract unit tests
 ```
 
-**Key Features:**
-- `BlugaCertificate` struct: Stores file hash, metadata, creator address, and timestamp
-
 ### 2. **Backend** (`/backend`)
 
 Express.js server providing API endpoints for blockchain interactions and file processing.
