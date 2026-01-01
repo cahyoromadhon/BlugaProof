@@ -18,8 +18,7 @@ Bluga Proof provides a trustless, decentralized solution for protecting digital 
 1. **File Upload** - User selects a file through the frontend interface
 2. **Hash Generation** - SHA256 hash is computed from the file content
 3. **Walrus Storage** - File is uploaded to Walrus decentralized storage
-4. **Certificate Minting** - Smart contract creates a `BlugaCertificate` NFT on Sui blockchain
-5. **Proof Generation** - Immutable record is created linking file hash, Walrus URL, and owner address
+4. **Proof Generation** - Immutable record is created linking file hash, Walrus URL, and owner address
 
 ### Verification Flow
 
